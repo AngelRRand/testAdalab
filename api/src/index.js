@@ -1,11 +1,21 @@
+// Imports
 const express = require('express');
+const mongoose = require("mongoose")
+const pokemonRoutes = require("./routes/pokemon")
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get('/', (req, res) => {
-    res.send('¡Welcome!');
-});
+// Middleware
+app.use(express.json())
+app.use("/api", pokemonRoutes)
+
+// MongoDB connection
+mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log("conectado"))
+    .catch(() => console.log("todo mal"))
+;
 
 app.listen(PORT, () => {
     console.log(`Server listening on http://localhost:${PORT}`);
