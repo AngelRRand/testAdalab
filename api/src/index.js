@@ -13,8 +13,8 @@ app.use("/api", pokemonRoutes)
 
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log("conectado"))
-    .catch(() => console.log("todo mal"))
+    .then(() => console.log("successful connection"))
+    .catch(() => console.log("failed connection"))
 ;
 
 app.listen(PORT, () => {

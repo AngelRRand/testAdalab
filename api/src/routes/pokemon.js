@@ -1,14 +1,18 @@
 const express = require('express');
-const pokemonSchema = require("../models/pokemon")
+const axios = require('axios');
+const PokemonData = require('../models/PokemonData');
+const Pokemon = require("../models/pokemon")
 
 const router = express.Router();
 
 
-router.post("/pokemon", (req, res) => {
-    const pokemon = pokemonSchema(req.body);
-    pokemon.save()
-        .then((data) => res.json(data))
-        .catch((error) => res.json({message: error}))
+router.get("/pokemons", async (req, res) => {
+    try {
+        const pokemons = await Pokemon.find();
+        res.json(pokemons);
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
 });
 
 
