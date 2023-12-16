@@ -8,16 +8,8 @@ const router = express.Router();
 
 router.get("/pokemon", async (req, res) => {
     try {
-
-        const {type} = req.query;
-        if (type) {
-            const pokemonsByType = await Pokemon.find({types: {$in: [type]}});
-            res.json(pokemonsByType);
-        } else {
-            const pokemons = await Pokemon.find();
-            res.json(pokemons);
-        }
-
+        const pokemons = await Pokemon.find();
+        res.json(pokemons);
     } catch (error) {
         res.status(500).json({message: error.message});
     }
