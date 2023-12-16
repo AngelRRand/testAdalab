@@ -6,7 +6,7 @@ const Pokemon = require("../models/pokemon")
 const router = express.Router();
 
 
-router.get("/pokemons", async (req, res) => {
+router.get("/pokemon", async (req, res) => {
     try {
         const pokemons = await Pokemon.find();
         res.json(pokemons);
@@ -15,5 +15,15 @@ router.get("/pokemons", async (req, res) => {
     }
 });
 
+router.get("/pokemon/:id", async (req, res) => {
+    try {
+        const {id} = req.params;
+        const pokemon = await PokemonData.find({"id": id});
+        res.json(pokemon);
+
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+});
 
 module.exports = router;
