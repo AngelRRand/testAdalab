@@ -1,11 +1,12 @@
 import style from "./Card.module.scss"
 import {colors} from "../../helper";
+import {pokemon} from "../../interface";
 
-export default function Card({name, img, types, id}) {
+export default function Card({name, imageUrl, types, id}: pokemon) {
     return (
         <article className={style.card}>
             <div className={style.containerImg}>
-                <img src={img} width={96} height={96} alt={name}/>
+                <img src={imageUrl} width={96} height={96} alt={name}/>
             </div>
             <div className={style.dataContainer}>
 
