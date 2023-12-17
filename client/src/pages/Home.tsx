@@ -1,16 +1,35 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Layout from "../components/layout/Layout.tsx";
 import style from "./Home.module.scss";
 import iconSearch from "../assets/search.svg";
+import axios from "axios";
+import Card from "../components/card/Card.tsx";
 
 export default function Home() {
 
     const [input, setInput] = useState("")
+    const [pokemons, setPokemons] = useState([]);
+
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get('http://localhost:3000/api/pokemon');
+                setPokemons(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        fetchData();
+    }, []);
 
 
     const search = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value)
     }
+
+    console.log(pokemons)
 
     return (
         <Layout>
@@ -29,7 +48,15 @@ export default function Home() {
 
                 {/* Container pokemons */}
                 <section className={style.pokemonsContainer}>
-
+                    {
+                        pokemons.map(d => {
+                            return (
+                                <Card
+                                    name={d.name}
+                                />
+                            )
+                        })
+                    }
                 </section>
 
             </div>
