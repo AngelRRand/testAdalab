@@ -53,6 +53,9 @@ export default function Home() {
                             return (
                                 <Card
                                     name={d.name}
+                                    img={d.imageUrl}
+                                    types={d.types}
+                                    id={d.id}
                                 />
                             )
                         })
