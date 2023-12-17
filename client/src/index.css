@@ -41,3 +41,10 @@ span, p, input {
 .id {
     color: var(--secondary-color);
 }
+
+
+@media (min-width: 1100px) {
+    span, p, input {
+        font-size: calc(0.6em + 10%);
+    }
+}

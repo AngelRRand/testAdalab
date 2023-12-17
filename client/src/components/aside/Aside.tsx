@@ -9,7 +9,7 @@ export default function Aside({pokemonData, view, setView, fetchPokemonData}: as
     return (
         <aside
             className={`${style.container} ${view ? style.asideDetailHidden : ''}`}
-            style={{backgroundColor: window.innerWidth >= 1100 ? '' : colors(pokemonData?.types[0])}}
+            style={{backgroundImage: `linear-gradient(-180deg, ${colors(pokemonData?.types[0])} 50%, #f3f3f3 100%)`}}
         >
             <button
                 className={style.cancel}
@@ -113,18 +113,25 @@ export default function Aside({pokemonData, view, setView, fetchPokemonData}: as
                         <div className={style.dataContainer}>
                             {
                                 pokemonData?.evolution.evolutions.map((e) => {
-                                    return (
-                                        <div key={e.id} className={style.boxEvolution}>
-                                            <img
-                                                alt={e.name}
-                                                src={e.imageUrl}
-                                                width={64}
-                                                height={64}
-                                                onClick={() => fetchPokemonData(e.id)}
-                                            />
+                                    if (e.id < 250) {
+                                        return (
+                                            <div key={e.id} className={style.boxEvolution}>
+                                                <img
+                                                    alt={e.name}
+                                                    src={e.imageUrl}
+                                                    width={64}
+                                                    height={64}
+                                                    onClick={() => fetchPokemonData(e.id)}
+                                                />
 
-                                        </div>
-                                    )
+                                            </div>
+                                        )
+                                    } else {
+                                        return (
+                                            <></>
+                                        )
+                                    }
+
                                 })
                             }
 
