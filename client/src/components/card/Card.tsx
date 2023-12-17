@@ -1,10 +1,10 @@
 import style from "./Card.module.scss"
 import {colors} from "../../helper";
-import {pokemon} from "../../interface";
+import {pokemonCard} from "../../interface";
 
-export default function Card({name, imageUrl, types, id}: pokemon) {
+export default function Card({name, imageUrl, types, id, fetchPokemonData}: pokemonCard) {
     return (
-        <article className={style.card}>
+        <article className={style.card} onClick={() => fetchPokemonData(id)}>
             <div className={style.containerImg}>
                 <img src={imageUrl} width={96} height={96} alt={name}/>
             </div>

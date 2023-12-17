@@ -4,7 +4,7 @@ import style from "./Home.module.scss";
 import iconSearch from "../assets/search.svg";
 import axios from "axios";
 import Card from "../components/card/Card.tsx";
-import {pokemon} from "../interface";
+import {pokemon, PokemonDataType} from "../interface";
 import Aside from "../components/aside/Aside.tsx";
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
 
 
     const [pokemons, setPokemons] = useState<pokemon[]>([]);
-    const [pokemonData, setPokemonData] = useState({})
+    const [pokemonData, setPokemonData] = useState<PokemonDataType | null>(null)
 
 
     useEffect(() => {
@@ -36,6 +36,14 @@ export default function Home() {
         setInput(e.target.value)
     }
 
+    const fetchPokemonData = async (id: number) => {
+        try {
+            const response = await axios.get(`http://localhost:3000/api/pokemon/${id}`);
+            setPokemonData(response.data)
+        } catch (e) {
+            console.error('Error fetching data:', e);
+        }
+    }
 
     return (
         <Layout>
@@ -63,7 +71,9 @@ export default function Home() {
                                     types={d.types}
                                     id={d.id}
                                     key={d.id}
+                                    fetchPokemonData={fetchPokemonData}
                                 />
+
                             )
                         })
                     }
@@ -73,7 +83,7 @@ export default function Home() {
 
 
             <Aside
-
+                pokemonData={pokemonData}
             />
         </Layout>
     )

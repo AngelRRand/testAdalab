@@ -17,7 +17,7 @@ router.get("/pokemon", async (req, res) => {
 router.get("/pokemon/:id", async (req, res) => {
     try {
         const {id} = req.params;
-        const pokemon = await PokemonData.find({"id": id});
+        const pokemon = await PokemonData.findOne({"id": id});
         res.json(pokemon);
 
     } catch (error) {
