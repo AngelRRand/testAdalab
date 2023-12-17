@@ -52,7 +52,10 @@ export default function Home() {
     }
 
     return (
-        <Layout>
+        <Layout
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+        >
             <div className={style.container}>
 
                 {/* Search input */}

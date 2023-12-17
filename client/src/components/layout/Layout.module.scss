@@ -1,7 +1,8 @@
 .container {
   display: flex;
-  width: 80vw;
-  height: auto;
+  width: 100vw;
   padding-top: 1rem;
-
+  height: 100vh;
+  overflow-x: hidden;
+  justify-content: center;
 }

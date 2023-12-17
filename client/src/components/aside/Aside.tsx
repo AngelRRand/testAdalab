@@ -7,7 +7,10 @@ export default function Aside({pokemonData, view, setView, fetchPokemonData}: as
 
 
     return (
-        <aside className={`${style.container} ${view ? style.asideDetailHidden : ''}`}>
+        <aside
+            className={`${style.container} ${view ? style.asideDetailHidden : ''}`}
+            style={{backgroundColor: window.innerWidth >= 1100 ? '' : colors(pokemonData?.types[0])}}
+        >
             <button
                 className={style.cancel}
                 onClick={() => {

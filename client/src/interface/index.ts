@@ -1,3 +1,5 @@
+import {ReactNode} from "react";
+
 export interface pokemon {
     name: string;
     imageUrl: string;
@@ -41,4 +43,10 @@ export interface PokemonDataType {
             id: number;
         }[];
     };
+}
+
+export interface LayoutProps {
+    children: ReactNode;
+    currentPage: number;
+    setCurrentPage: (currentPage: number) => void;
 }

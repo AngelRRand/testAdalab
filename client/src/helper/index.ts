@@ -1,4 +1,4 @@
-export const colors = (type: string) => {
+export const colors = (type: string | undefined) => {
     let color = ''
     switch (type) {
         case 'grass':
@@ -62,7 +62,7 @@ export const colors = (type: string) => {
 }
 
 
-export const statsName = (index: number) => {
+export const statsName = (index: number | undefined) => {
     let data: { text: string, color: string } = {text: '', color: ''}
     switch (index) {
         case 0:
@@ -93,7 +93,7 @@ export const statsName = (index: number) => {
 }
 
 
-export const upperCaseText = (text: string) => {
+export const upperCaseText = (text: string | undefined) => {
     if (text) {
         return text.charAt(0).toUpperCase() + text.slice(1)
 
