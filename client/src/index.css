@@ -37,3 +37,7 @@ input:focus {
 span, p, input {
     font-size: calc(0.5em + 10%);
 }
+
+.id {
+    color: var(--secondary-color);
+}

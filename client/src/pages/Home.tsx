@@ -56,6 +56,7 @@ export default function Home() {
                                     img={d.imageUrl}
                                     types={d.types}
                                     id={d.id}
+                                    key={d.id}
                                 />
                             )
                         })
