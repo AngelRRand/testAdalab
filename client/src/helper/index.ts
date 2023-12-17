@@ -60,3 +60,42 @@ export const colors = (type: string) => {
     }
     return color
 }
+
+
+export const statsName = (index: number) => {
+    let data: { text: string, color: string } = {text: '', color: ''}
+    switch (index) {
+        case 0:
+            data = {text: 'HP', color: '#FA5858'};
+            break;
+        case 1:
+            data = {text: 'ATK', color: '#fa9158'};
+            break;
+        case 2:
+            data = {text: 'DEF', color: '#fadf58'};
+            break;
+        case 3:
+            data = {text: 'SpA', color: '#58fafa'};
+            break;
+        case 4:
+            data = {text: 'SpD', color: '#86fa58'};
+            break;
+        case 5:
+            data = {text: 'SPD', color: '#cc58fa'};
+            break;
+        case 6:
+            data = {text: 'TOT', color: '#589efa'};
+            break;
+        default:
+            break;
+    }
+    return data
+}
+
+
+export const upperCaseText = (text: string) => {
+    if (text) {
+        return text.charAt(0).toUpperCase() + text.slice(1)
+
+    }
+}

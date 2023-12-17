@@ -15,6 +15,10 @@ export interface pokemonCard {
 
 export interface asideType {
     pokemonData: PokemonDataType | null;
+    view: boolean
+    setView: (loader: boolean) => void;
+    fetchPokemonData: (id: number) => void;
+
 }
 
 export interface PokemonDataType {

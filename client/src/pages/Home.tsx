@@ -10,7 +10,7 @@ import Aside from "../components/aside/Aside.tsx";
 export default function Home() {
 
     const [input, setInput] = useState("")
-    const [loader, setLoader] = useState(false)
+    const [view, setView] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
 
 
@@ -38,8 +38,14 @@ export default function Home() {
 
     const fetchPokemonData = async (id: number) => {
         try {
+            setView(false)
             const response = await axios.get(`http://localhost:3000/api/pokemon/${id}`);
             setPokemonData(response.data)
+            setTimeout(() => {
+                setView(true)
+            }, 300);
+
+
         } catch (e) {
             console.error('Error fetching data:', e);
         }
@@ -84,6 +90,9 @@ export default function Home() {
 
             <Aside
                 pokemonData={pokemonData}
+                view={view}
+                setView={setView}
+                fetchPokemonData={fetchPokemonData}
             />
         </Layout>
     )
