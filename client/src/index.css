@@ -2,16 +2,22 @@
     font-family: 'Outfit', sans-serif;
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
+
 }
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
     --primary-color: #011030;
     --secondary-color: #8F9396;
+    --background: #f3f3f3
 }
 
 body {
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--background);
 }
 
 h1, h2, h3, h4, h5, h6 {
