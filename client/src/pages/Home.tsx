@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Layout from "../components/layout/Layout.tsx";
 import style from "./Home.module.scss";
-import iconSearch from "../assets/search.svg";
 import axios from "axios";
 import Card from "../components/card/Card.tsx";
 import {pokemon, PokemonDataType} from "../interface";
@@ -15,6 +14,7 @@ export default function Home() {
 
 
     const [pokemons, setPokemons] = useState<pokemon[]>([]);
+    const [pokemonsFilter, setPokemonsFilter] = useState<pokemon[]>([]);
     const [pokemonData, setPokemonData] = useState<PokemonDataType | null>(null)
 
 
@@ -34,6 +34,8 @@ export default function Home() {
 
     const search = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInput(e.target.value)
+        const filter = pokemons.filter(p => p.name.toLowerCase().includes(e.target.value.toLowerCase()))
+        setPokemonsFilter(filter)
     }
 
     const fetchPokemonData = async (id: number) => {
@@ -51,6 +53,8 @@ export default function Home() {
         }
     }
 
+    const displayedPokemons = input ? pokemonsFilter : pokemons;
+
     return (
         <Layout
             currentPage={currentPage}
@@ -59,20 +63,15 @@ export default function Home() {
             <div className={style.container}>
 
                 {/* Search input */}
-                <div className={style.input}>
-                    <input
-                        placeholder='Search you pokemon' type="text" value={input}
-                        onChange={(e) => search(e)}
-                    />
-                    <button>
-                        <img src={iconSearch} alt='search icon' width={30} height={30}/>
-                    </button>
-                </div>
+                <input
+                    placeholder='Search you pokemon' type="text" value={input}
+                    onChange={(e) => search(e)}
+                />
 
                 {/* Container pokemons */}
                 <section className={style.pokemonsContainer}>
-                    {
-                        pokemons.slice(0, currentPage * 20).map(d => {
+                    {displayedPokemons.length > 0 ? (
+                        displayedPokemons.slice(0, currentPage * 20).map(d => {
                             return (
                                 <Card
                                     name={d.name}
@@ -85,7 +84,11 @@ export default function Home() {
 
                             )
                         })
-                    }
+                    ) : (
+                        <h4 className={style.errorMenssage}>Pokemon not found</h4>
+                    )}
+
+
                 </section>
 
             </div>
