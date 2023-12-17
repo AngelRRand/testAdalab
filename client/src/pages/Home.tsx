@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import Layout from "../components/layout/Layout.tsx";
 import style from "./Home.module.scss";
 import iconSearch from "../assets/search.svg";
@@ -6,6 +6,11 @@ import iconSearch from "../assets/search.svg";
 export default function Home() {
 
     const [input, setInput] = useState("")
+
+
+    const search = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setInput(e.target.value)
+    }
 
     return (
         <Layout>
@@ -15,6 +20,7 @@ export default function Home() {
                 <div className={style.input}>
                     <input
                         placeholder='Search you pokemon' type="text" value={input}
+                        onChange={(e) => search(e)}
                     />
                     <button>
                         <img src={iconSearch} alt='search icon' width={30} height={30}/>
@@ -22,7 +28,7 @@ export default function Home() {
                 </div>
 
                 {/* Container pokemons */}
-                <section className={styles.pokemonsContainer}>
+                <section className={style.pokemonsContainer}>
 
                 </section>
 
