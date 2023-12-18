@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
-import Layout from "../components/layout/Layout.tsx";
-import style from "./Home.module.scss";
-import axios from "axios";
-import Card from "../components/card/Card.tsx";
 import {pokemon, PokemonDataType} from "../interface";
+import Layout from "../components/layout/Layout.tsx";
+import Card from "../components/card/Card.tsx";
 import Aside from "../components/aside/Aside.tsx";
 import Loader from "../components/loader/Loader.tsx";
+import upArrow from "../assets/up-arrow.svg";
+import style from "./Home.module.scss";
+import axios from "axios";
 
 export default function Home() {
 
@@ -73,6 +74,7 @@ export default function Home() {
                         <input
                             placeholder='Search you pokemon' type="text" value={input}
                             onChange={(e) => search(e)}
+                            id={"header"}
                         />
 
                         {/* Container pokemons */}
@@ -102,6 +104,12 @@ export default function Home() {
 
                 )
             }
+
+            <a href={"#header"} className={style.arrow}>
+                <button>
+                    <img src={upArrow} width={96} height={96} alt={"arrow"}/>
+                </button>
+            </a>
 
 
             <Aside

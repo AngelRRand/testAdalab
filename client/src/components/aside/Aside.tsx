@@ -11,17 +11,20 @@ export default function Aside({pokemonData, view, setView, fetchPokemonData}: as
             className={`${style.container} ${view ? style.asideDetailHidden : ''}`}
             style={{backgroundImage: `linear-gradient(-180deg, ${colors(pokemonData?.types[0])} 50%, #f3f3f3 100%)`}}
         >
+
             <button
                 className={style.cancel}
                 onClick={() => {
                     setView(false)
                 }}>
+
                 <img
                     src={closeIcon}
                     alt={"Icon"}
                     width={25}
                     height={25}
                 />
+
             </button>
 
             <div className={style.containerImg}>
@@ -47,8 +50,11 @@ export default function Aside({pokemonData, view, setView, fetchPokemonData}: as
                             pokemonData?.types.map((t, i) => {
                                 let color = colors(t)
                                 return (
-                                    <span style={{backgroundColor: color}}
-                                          key={i}>{upperCaseText(t)}</span>
+                                    <span
+                                        style={{backgroundColor: color}}
+                                        key={i}>
+                                        {upperCaseText(t)}
+                                    </span>
                                 )
                             })
                         }
