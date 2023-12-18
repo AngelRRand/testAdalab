@@ -1,9 +1,11 @@
-import style from "./Layout.module.scss"
+import style from "./Layout.module.scss";
 import {LayoutProps} from "../../interface";
 import {useEffect, useRef} from "react";
 
-
 export default function Layout({currentPage, setCurrentPage, children}: LayoutProps) {
+    const currentPageValue = currentPage ?? 0;
+    const setCurrentPageValue = setCurrentPage ?? (() => {
+    });
 
     const listContainerRef = useRef<HTMLDivElement>(null);
 
@@ -12,7 +14,7 @@ export default function Layout({currentPage, setCurrentPage, children}: LayoutPr
             const container = listContainerRef.current;
 
             if (container && container.scrollTop + container.clientHeight >= container.scrollHeight - 100) {
-                setCurrentPage(currentPage += 1);
+                setCurrentPageValue(currentPageValue + 1);
             }
         };
 
@@ -24,13 +26,11 @@ export default function Layout({currentPage, setCurrentPage, children}: LayoutPr
                 container.removeEventListener('scroll', handleScroll);
             };
         }
-    }, [currentPage, setCurrentPage, listContainerRef]);
-
+    }, [currentPageValue, setCurrentPageValue, listContainerRef]);
 
     return (
         <main className={style.container} ref={listContainerRef}>
             {children}
         </main>
-
     )
 }

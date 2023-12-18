@@ -47,6 +47,6 @@ export interface PokemonDataType {
 
 export interface LayoutProps {
     children: ReactNode;
-    currentPage: number;
-    setCurrentPage: (currentPage: number) => void;
+    currentPage?: number;
+    setCurrentPage?: (currentPage: number) => void;
 }
