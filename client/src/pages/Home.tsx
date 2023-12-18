@@ -5,12 +5,14 @@ import axios from "axios";
 import Card from "../components/card/Card.tsx";
 import {pokemon, PokemonDataType} from "../interface";
 import Aside from "../components/aside/Aside.tsx";
+import Loader from "../components/loader/Loader.tsx";
 
 export default function Home() {
 
     const [input, setInput] = useState("")
     const [view, setView] = useState(false)
     const [currentPage, setCurrentPage] = useState(1)
+    const [loader, setLoader] = useState(true)
 
 
     const [pokemons, setPokemons] = useState<pokemon[]>([]);
@@ -29,6 +31,7 @@ export default function Home() {
         }
 
         fetchData();
+        setLoader(false)
     }, []);
 
 
@@ -60,38 +63,45 @@ export default function Home() {
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
         >
-            <div className={style.container}>
+            {
+                loader ? (
+                    <Loader/>
+                ) : (
+                    <div className={style.container}>
 
-                {/* Search input */}
-                <input
-                    placeholder='Search you pokemon' type="text" value={input}
-                    onChange={(e) => search(e)}
-                />
+                        {/* Search input */}
+                        <input
+                            placeholder='Search you pokemon' type="text" value={input}
+                            onChange={(e) => search(e)}
+                        />
 
-                {/* Container pokemons */}
-                <section className={style.pokemonsContainer}>
-                    {displayedPokemons.length > 0 ? (
-                        displayedPokemons.slice(0, currentPage * 20).map(d => {
-                            return (
-                                <Card
-                                    name={d.name}
-                                    imageUrl={d.imageUrl}
-                                    types={d.types}
-                                    id={d.id}
-                                    key={d.id}
-                                    fetchPokemonData={fetchPokemonData}
-                                />
+                        {/* Container pokemons */}
+                        <section className={style.pokemonsContainer}>
+                            {displayedPokemons.length > 0 ? (
+                                displayedPokemons.slice(0, currentPage * 20).map(d => {
+                                    return (
+                                        <Card
+                                            name={d.name}
+                                            imageUrl={d.imageUrl}
+                                            types={d.types}
+                                            id={d.id}
+                                            key={d.id}
+                                            fetchPokemonData={fetchPokemonData}
+                                        />
 
-                            )
-                        })
-                    ) : (
-                        <h4 className={style.errorMenssage}>Pokemon not found</h4>
-                    )}
+                                    )
+                                })
+                            ) : (
+                                <h4 className={style.errorMenssage}>Pokemon not found</h4>
+                            )}
 
 
-                </section>
+                        </section>
 
-            </div>
+                    </div>
+
+                )
+            }
 
 
             <Aside
